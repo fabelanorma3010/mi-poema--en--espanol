@@ -255,7 +255,8 @@ function generatePoem(event) {
   const length = document.querySelector("#poem-length").value;
   const context =
     "Eres poeta en español. Escribe un poema según las indicaciones del usuario. Separa cada verso con <br />. No incluyas título ni firma.";
-  const prompt = `Escribe un poema de ${length} versos, de tono ${tone}, sobre ${theme}, inspirado en: ${instructionsInput.value.trim()}`;
+  const inspiration = instructionsInput.value.trim();
+  const prompt = `Escribe un poema de ${length} versos, de tono ${tone}, sobre ${theme}.${inspiration ? ` Inspírate en: ${inspiration}` : ""}`;
   const query = new URLSearchParams({ prompt, context, key: apiKey });
   const apiURL = `https://api.shecodes.io/ai/v1/generate?${query}`;
 
@@ -272,7 +273,7 @@ function generatePoem(event) {
 
   poemElement.classList.remove("hidden");
   poemElement.setAttribute("aria-busy", "true");
-  poemContent.textContent = `Escribiendo un poema sobre ${instructionsInput.value.trim()}…`;
+  poemContent.textContent = `Escribiendo un poema sobre ${inspiration || theme}…`;
   poemContent.classList.add("generating");
   submitButton.disabled = true;
 
