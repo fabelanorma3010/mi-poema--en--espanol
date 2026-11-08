@@ -1,54 +1,82 @@
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <meta
+      name="description"
+      content="Crea poemas breves sobre el amor, la esperanza y la vida en español."
+    />
     <link rel="stylesheet" href="src/style.css" />
-    <title>AI Spanish Poema</title>
+    <script defer src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <script defer src="src/index.js"></script>
+    <title>Poemas de amor, esperanza y vida</title>
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>AI Spanish Poema</h1>
+        <button
+          class="siren-toggle"
+          id="siren-toggle"
+          type="button"
+          aria-pressed="false"
+        >
+          <span class="siren" aria-hidden="true">🚨</span>
+          <span id="siren-toggle-label">Encender sirena</span>
+        </button>
+        <p class="eyebrow">Palabras para celebrar la vida</p>
+        <h1>Amor que inspira,<br /><span>vida que florece.</span></h1>
+        <p class="intro">
+          Crea un poema en español sobre el amor, la esperanza y la belleza de
+          cada nuevo día.
+        </p>
       </header>
 
       <main>
-        <div class="form-container">
+        <section class="form-container" aria-label="Generador de poemas">
           <form id="poem-generator-form">
+            <label for="user-instructions">¿Qué quieres expresar?</label>
             <input
               type="text"
-              placeholder="Enter the topic of an English poem"
-              autofocus
+              placeholder="Escribe una idea, un sueño o un nuevo comienzo"
               required
               autocomplete="off"
               class="instructions"
               id="user-instructions"
+              maxlength="120"
+              value="amor, esperanza y vida"
             />
-            <input type="submit" class="submit-button" />
+            <button type="submit" class="submit-button">Crear un poema <span aria-hidden="true">→</span></button>
           </form>
-          <div class="hint">i.e: amor, flores or vida</div>
-        </div>
-        <div class="poem hidden" id="poem"></div>
+          <p class="hint">Tu poema sobre el amor, la esperanza y la vida será breve e inspirador.</p>
+        </section>
+
+        <section
+          class="poem hidden"
+          id="poem"
+          aria-live="polite"
+          aria-busy="false"
+          aria-label="Tu poema generado"
+        >
+          <p class="poem-label">Tu poema <span aria-hidden="true">✦</span></p>
+          <div class="poem-content" id="poem-content"></div>
+        </section>
       </main>
 
       <footer>
-        este AI projecto was coded by
-        <a href="https://github.com/fabelanorma3010" targerget="_blank"
+        Hecho con cariño por
+        <a href="https://github.com/fabelanorma3010" target="_blank" rel="noopener noreferrer"
           >Norma Fabela</a
-        >
+        >.
         <a
           href="https://github.com/fabelanorma3010/Mi-poema-en-espanol"
           target="_blank"
+          rel="noopener noreferrer"
         >
-          open-source on GitHub</a
-        >
-        and is
-        <a href="" target="_blank">hosted on vercel</a>.
+          Ver el proyecto en GitHub</a
+        >.
       </footer>
     </div>
-
-    <script src="src/index.js"></script>
   </body>
 </html>
