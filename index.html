@@ -5,31 +5,62 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="Crea poemas breves sobre el amor, la esperanza y la vida en español."
+      content="Crea poemas breves sobre el amor, la esperanza, la vida, la salud y la paz en español."
     />
     <link rel="stylesheet" href="src/style.css" />
     <script defer src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
     <script defer src="src/index.js"></script>
-    <title>Poemas de amor, esperanza y vida</title>
+    <title>Poemas de amor, esperanza, vida, salud y paz</title>
   </head>
   <body>
-    <div class="container">
+    <div class="stars" id="stars" aria-hidden="true" hidden>
+      <span>✦</span><span>✧</span><span>✦</span><span>✧</span>
+      <span>✦</span><span>✧</span><span>✦</span><span>✧</span>
+      <span>✦</span><span>✧</span><span>✦</span><span>✧</span>
+    </div>
+    <section class="gift-intro" id="gift-intro" aria-labelledby="gift-title" hidden>
+      <p class="eyebrow">Un detalle para ti</p>
+      <h1 id="gift-title">Un regalo lleno de <span>palabras.</span></h1>
+      <p class="gift-message">Dentro encontrarás amor, esperanza, vida, salud y paz.</p>
+      <button class="gift-button" id="gift-button" type="button">
+        <span class="gift-box" aria-hidden="true">
+          <span class="gift-bow"></span>
+          <span class="gift-lid"></span>
+          <span class="gift-base"></span>
+        </span>
+        <span class="gift-button-label">Abrir mi regalo <span aria-hidden="true">→</span></span>
+      </button>
+      <p class="gift-hint">Haz clic en el regalo para descubrirlo</p>
+    </section>
+
+    <div class="container" id="page-content">
       <header>
-        <button
-          class="siren-toggle"
-          id="siren-toggle"
-          type="button"
-          aria-pressed="false"
-        >
-          <span class="siren" aria-hidden="true">🚨</span>
-          <span id="siren-toggle-label">Encender sirena</span>
-        </button>
+        <div class="header-controls">
+          <button
+            class="siren-toggle"
+            id="siren-toggle"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="siren" aria-hidden="true">🚨</span>
+            <span id="siren-toggle-label">Encender sirena</span>
+          </button>
+          <button
+            class="light-toggle"
+            id="light-toggle"
+            type="button"
+            aria-pressed="false"
+          >
+            <span class="light-bulb" aria-hidden="true">💡</span>
+            <span id="light-toggle-label">Encender luz</span>
+          </button>
+        </div>
         <p class="eyebrow">Palabras para celebrar la vida</p>
-        <h1>Amor que inspira,<br /><span>vida que florece.</span></h1>
+        <h1 id="page-title" tabindex="-1">Amor que inspira,<br /><span>vida que florece.</span></h1>
         <p class="intro">
-          Crea un poema en español sobre el amor, la esperanza y la belleza de
-          cada nuevo día.
+          Crea un poema en español sobre el amor, la esperanza, la vida, la
+          salud y la paz.
         </p>
       </header>
 
@@ -45,11 +76,11 @@
               class="instructions"
               id="user-instructions"
               maxlength="120"
-              value="amor, esperanza y vida"
+              value="amor, esperanza, vida, salud y paz"
             />
             <button type="submit" class="submit-button">Crear un poema <span aria-hidden="true">→</span></button>
           </form>
-          <p class="hint">Tu poema sobre el amor, la esperanza y la vida será breve e inspirador.</p>
+          <p class="hint">Tu poema sobre el amor, la esperanza, la vida, la salud y la paz será breve e inspirador.</p>
         </section>
 
         <section
@@ -61,6 +92,15 @@
         >
           <p class="poem-label">Tu poema <span aria-hidden="true">✦</span></p>
           <div class="poem-content" id="poem-content"></div>
+          <button type="button" class="save-poem-button" id="save-poem" hidden>Guardar poema</button>
+        </section>
+
+        <section class="saved-poems" aria-labelledby="saved-poems-title">
+          <h2 id="saved-poems-title">Mis poemas guardados</h2>
+          <p class="saved-poems-note">Se guardan únicamente en este navegador y dispositivo.</p>
+          <p id="saved-poems-status" class="saved-poems-status" role="status"></p>
+          <p id="saved-poems-empty" class="saved-poems-note">Aún no has guardado ningún poema.</p>
+          <ul id="saved-poems-list" class="saved-poems-list"></ul>
         </section>
       </main>
 
