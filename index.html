@@ -56,6 +56,10 @@
             <span class="light-bulb" aria-hidden="true">💡</span>
             <span id="light-toggle-label">Encender luz</span>
           </button>
+          <button class="music-toggle" id="music-toggle" type="button" aria-pressed="false">
+            <span aria-hidden="true">♫</span>
+            <span id="music-toggle-label">Activar música</span>
+          </button>
         </div>
         <p class="eyebrow">Palabras para celebrar la vida</p>
         <h1 id="page-title" tabindex="-1">Amor que inspira,<br /><span>vida que florece.</span></h1>
@@ -79,9 +83,39 @@
               maxlength="120"
               value="amor, esperanza, vida, salud y paz"
             />
+            <div class="poem-options">
+              <div>
+                <label for="poem-theme">Tema</label>
+                <select id="poem-theme" class="instructions">
+                  <option value="amor, esperanza, vida, salud y paz">Todos los temas</option>
+                  <option value="amor">Amor</option>
+                  <option value="esperanza">Esperanza</option>
+                  <option value="vida">Vida</option>
+                  <option value="salud">Salud</option>
+                  <option value="paz">Paz</option>
+                </select>
+              </div>
+              <div>
+                <label for="poem-tone">Tono</label>
+                <select id="poem-tone" class="instructions">
+                  <option value="esperanzador">Esperanzador</option>
+                  <option value="romántico">Romántico</option>
+                  <option value="sereno">Sereno</option>
+                  <option value="alegre">Alegre</option>
+                </select>
+              </div>
+              <div>
+                <label for="poem-length">Extensión</label>
+                <select id="poem-length" class="instructions">
+                  <option value="4">4 versos</option>
+                  <option value="8">8 versos</option>
+                  <option value="12">12 versos</option>
+                </select>
+              </div>
+            </div>
             <button type="submit" class="submit-button">Crear un poema <span aria-hidden="true">→</span></button>
           </form>
-          <p class="hint">Tu poema sobre el amor, la esperanza, la vida, la salud y la paz será breve e inspirador.</p>
+          <p class="hint">Elige un tema, un tono y la extensión de tu poema.</p>
         </section>
 
         <section
@@ -93,7 +127,13 @@
         >
           <p class="poem-label">Tu poema <span aria-hidden="true">✦</span></p>
           <div class="poem-content" id="poem-content"></div>
-          <button type="button" class="save-poem-button" id="save-poem" hidden>Guardar poema</button>
+          <div class="poem-actions" id="poem-actions" hidden>
+            <button type="button" class="save-poem-button" id="save-poem">Guardar poema</button>
+            <button type="button" class="share-poem-button" id="copy-poem">Copiar</button>
+            <button type="button" class="share-poem-button" id="share-poem">Compartir</button>
+            <button type="button" class="share-poem-button" id="download-poem">Descargar tarjeta</button>
+          </div>
+          <p class="action-status" id="poem-action-status" role="status"></p>
         </section>
 
         <section class="saved-poems" aria-labelledby="saved-poems-title">
