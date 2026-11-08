@@ -292,7 +292,8 @@ header {
   animation: siren-flash 700ms ease-in-out infinite alternate;
 }
 
-.light-toggle {
+.light-toggle,
+.music-toggle {
   display: inline-flex;
   min-height: 44px;
   align-items: center;
@@ -309,16 +310,19 @@ header {
   transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
 }
 
-.light-toggle:hover {
+.light-toggle:hover,
+.music-toggle:hover {
   border-color: #dfb751;
 }
 
-.light-toggle:focus-visible {
+.light-toggle:focus-visible,
+.music-toggle:focus-visible {
   outline: 3px solid rgba(223, 183, 81, 0.4);
   outline-offset: 3px;
 }
 
-.light-toggle.is-on {
+.light-toggle.is-on,
+.music-toggle.is-on {
   border-color: #777;
   background: #fff;
   color: #222;
@@ -436,6 +440,22 @@ label {
   box-shadow: 0 0 0 3px rgba(166, 76, 85, 0.14);
 }
 
+.poem-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+}
+
+.poem-options label {
+  display: block;
+  margin-bottom: 8px;
+}
+
+.poem-options select {
+  cursor: pointer;
+  padding-right: 8px;
+}
+
 .submit-button {
   display: flex;
   min-height: 54px;
@@ -510,6 +530,7 @@ label {
 }
 
 .save-poem-button,
+.share-poem-button,
 .remove-poem-button {
   min-height: 44px;
   padding: 10px 16px;
@@ -523,19 +544,39 @@ label {
   font-weight: 700;
 }
 
-.save-poem-button {
+.poem-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
   margin-top: 20px;
 }
 
 .save-poem-button:hover:not(:disabled),
+.share-poem-button:hover,
 .remove-poem-button:hover {
   background: #faecec;
 }
 
 .save-poem-button:focus-visible,
+.share-poem-button:focus-visible,
 .remove-poem-button:focus-visible {
   outline: 3px solid rgba(166, 76, 85, 0.35);
   outline-offset: 3px;
+}
+
+.action-status {
+  margin: 10px 0 0;
+  color: var(--rose-dark);
+  font-size: 0.85rem;
+  line-height: 1.5;
+}
+
+.action-status:empty {
+  display: none;
+}
+
+.saved-poems-list .poem-actions {
+  margin-top: 0;
 }
 
 .save-poem-button:disabled {
