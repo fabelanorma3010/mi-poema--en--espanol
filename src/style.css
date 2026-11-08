@@ -14,6 +14,10 @@
   box-sizing: border-box;
 }
 
+[hidden] {
+  display: none !important;
+}
+
 body {
   min-width: 320px;
   min-height: 100vh;
@@ -28,8 +32,188 @@ body {
 }
 
 .container {
+  position: relative;
   width: min(100%, 620px);
   margin: 0 auto;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  color: #fff;
+}
+
+.stars span {
+  position: absolute;
+  font-size: clamp(1.1rem, 2.5vw, 2rem);
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.stars span:nth-child(1) { top: 8%; left: 7%; }
+.stars span:nth-child(2) { top: 19%; left: 22%; }
+.stars span:nth-child(3) { top: 10%; right: 12%; }
+.stars span:nth-child(4) { top: 29%; right: 4%; }
+.stars span:nth-child(5) { top: 42%; left: 5%; }
+.stars span:nth-child(6) { top: 52%; right: 16%; }
+.stars span:nth-child(7) { top: 68%; left: 13%; }
+.stars span:nth-child(8) { top: 76%; right: 5%; }
+.stars span:nth-child(9) { top: 87%; left: 6%; }
+.stars span:nth-child(10) { top: 91%; right: 23%; }
+.stars span:nth-child(11) { top: 34%; left: 32%; }
+.stars span:nth-child(12) { top: 64%; right: 31%; }
+
+.gift-intro {
+  display: flex;
+  min-height: calc(100vh - 96px);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.gift-intro h1 {
+  max-width: 600px;
+}
+
+.gift-message {
+  margin: 20px 0 36px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.gift-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  padding: 18px;
+  border: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  font: inherit;
+}
+
+.gift-button:focus-visible {
+  outline: 3px solid rgba(166, 76, 85, 0.5);
+  outline-offset: 4px;
+  border-radius: 12px;
+}
+
+.gift-button:disabled {
+  cursor: default;
+}
+
+.gift-box {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 190px;
+  filter: drop-shadow(0 18px 18px rgba(89, 58, 48, 0.16));
+}
+
+.gift-base,
+.gift-lid {
+  position: absolute;
+  left: 10px;
+  width: 160px;
+  background: linear-gradient(90deg, #b85460 0 42%, #efc9aa 42% 58%, #b85460 58%);
+}
+
+.gift-base {
+  bottom: 0;
+  height: 116px;
+  border-radius: 0 0 12px 12px;
+}
+
+.gift-lid {
+  z-index: 1;
+  top: 55px;
+  left: 0;
+  width: 180px;
+  height: 26px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #9f414f 0 42%, #e4b695 42% 58%, #9f414f 58%);
+  transition: transform 650ms ease, opacity 650ms ease;
+}
+
+.gift-bow {
+  position: absolute;
+  top: 12px;
+  left: 81px;
+  width: 18px;
+  height: 46px;
+  border-radius: 50%;
+  background: #e4b695;
+  transition: transform 650ms ease, opacity 650ms ease;
+}
+
+.gift-bow::before,
+.gift-bow::after {
+  position: absolute;
+  top: 0;
+  width: 52px;
+  height: 34px;
+  border: 9px solid #e4b695;
+  border-radius: 50% 50% 10% 50%;
+  content: "";
+}
+
+.gift-bow::before {
+  right: 7px;
+  transform: rotate(25deg);
+}
+
+.gift-bow::after {
+  left: 7px;
+  transform: scaleX(-1) rotate(25deg);
+}
+
+.gift-button:hover:not(:disabled) .gift-box {
+  transform: translateY(-4px);
+}
+
+.gift-box {
+  transition: transform 180ms ease;
+}
+
+.gift-button-label {
+  padding: 14px 24px;
+  border-radius: 999px;
+  background: var(--rose);
+  color: white;
+  font-weight: 700;
+}
+
+.gift-button:hover:not(:disabled) .gift-button-label {
+  background: var(--rose-dark);
+}
+
+.gift-hint {
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.82rem;
+}
+
+.gift-intro.is-opening .gift-lid,
+.gift-intro.is-opening .gift-bow {
+  opacity: 0;
+  transform: translateY(-80px) rotate(-12deg);
+}
+
+.gift-intro.is-opening .gift-base {
+  animation: gift-open 650ms ease forwards;
+}
+
+.header-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 18px;
 }
 
 header {
@@ -42,7 +226,6 @@ header {
   min-height: 44px;
   align-items: center;
   gap: 9px;
-  margin-bottom: 18px;
   padding: 7px 14px;
   border: 1px solid var(--line);
   border-radius: 999px;
@@ -77,6 +260,69 @@ header {
 
 .siren-toggle.is-on .siren {
   animation: siren-flash 700ms ease-in-out infinite alternate;
+}
+
+.light-toggle {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(255, 253, 250, 0.8);
+  color: var(--muted);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: border-color 160ms ease, background-color 160ms ease, box-shadow 160ms ease;
+}
+
+.light-toggle:hover {
+  border-color: #dfb751;
+}
+
+.light-toggle:focus-visible {
+  outline: 3px solid rgba(223, 183, 81, 0.4);
+  outline-offset: 3px;
+}
+
+.light-toggle.is-on {
+  border-color: #777;
+  background: #fff;
+  color: #222;
+  box-shadow: 0 0 25px rgba(255, 255, 255, 0.7);
+}
+
+.light-bulb {
+  font-size: 1.5rem;
+  line-height: 1;
+  filter: grayscale(1);
+}
+
+.light-toggle.is-on .light-bulb {
+  filter: grayscale(1) drop-shadow(0 0 9px #fff);
+}
+
+.light-on {
+  background: #fff;
+}
+
+.light-off {
+  background: #17171e;
+}
+
+.light-off header {
+  color: #fff;
+}
+
+.light-off header .eyebrow,
+.light-off header h1 span,
+.light-off header .intro,
+.light-off footer,
+.light-off footer a {
+  color: #f0dfdf;
 }
 
 .eyebrow,
@@ -116,7 +362,8 @@ h1 span {
 }
 
 .form-container,
-.poem {
+.poem,
+.saved-poems {
   border: 1px solid rgba(234, 223, 218, 0.9);
   border-radius: 20px;
   background: rgba(255, 253, 250, 0.94);
@@ -232,6 +479,81 @@ label {
   text-transform: uppercase;
 }
 
+.save-poem-button,
+.remove-poem-button {
+  min-height: 44px;
+  padding: 10px 16px;
+  border: 1px solid var(--rose);
+  border-radius: 9px;
+  background: transparent;
+  color: var(--rose-dark);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+
+.save-poem-button {
+  margin-top: 20px;
+}
+
+.save-poem-button:hover:not(:disabled),
+.remove-poem-button:hover {
+  background: #faecec;
+}
+
+.save-poem-button:focus-visible,
+.remove-poem-button:focus-visible {
+  outline: 3px solid rgba(166, 76, 85, 0.35);
+  outline-offset: 3px;
+}
+
+.save-poem-button:disabled {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.saved-poems {
+  margin-top: 22px;
+  padding: 26px 30px;
+}
+
+.saved-poems h2 {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.4rem;
+}
+
+.saved-poems-note,
+.saved-poems-status {
+  color: var(--muted);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+.saved-poems-status:not(:empty) {
+  color: var(--rose-dark);
+}
+
+.saved-poems-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.saved-poems-list li {
+  padding: 16px 0;
+  border-top: 1px solid var(--line);
+}
+
+.saved-poem-text {
+  margin: 0 0 14px;
+  font-family: "Playfair Display", Georgia, serif;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
 .generating {
   color: var(--muted);
   font-family: "DM Sans", Helvetica, Arial, sans-serif;
@@ -263,6 +585,13 @@ a:hover {
   }
 }
 
+@keyframes gift-open {
+  to {
+    opacity: 0;
+    transform: scale(1.12);
+  }
+}
+
 @keyframes siren-flash {
   from {
     filter: drop-shadow(0 0 2px rgba(229, 65, 65, 0.3));
@@ -282,6 +611,10 @@ a:hover {
 
   header {
     padding: 42px 4px 26px;
+  }
+
+  .gift-intro {
+    min-height: calc(100vh - 50px);
   }
 
   .form-container {
